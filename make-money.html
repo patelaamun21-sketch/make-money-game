@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Make Money</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #111;
+      color: white;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>💸 Make Money</h1>
+  <h2 id="money">Money: 0</h2>
+  <h3 id="perSec">Per Second: 0</h3>
+
+  <button onclick="clickMoney()">Click for Money</button>
+  <br><br>
+  <button onclick="buyUpgrade()">Buy Upgrade ($50)</button>
+  <button onclick="infiniteMoney()">Infinite Money</button>
+
+  <script>
+    let money = 0;
+    let perSecond = 0;
+    let upgradeCost = 50;
+
+    function clickMoney() {
+      money += 1;
+      update();
+    }
+
+    function buyUpgrade() {
+      if (money >= upgradeCost) {
+        money -= upgradeCost;
+        perSecond += 1;
+        upgradeCost *= 2; // each upgrade doubles in cost
+        update();
+      }
+    }
+
+    function infiniteMoney() {
+      money = 999999999;
+      update();
+    }
+
+    function update() {
+      document.getElementById("money").innerText = "Money: " + money;
+      document.getElementById("perSec").innerText = "Per Second: " + perSecond;
+      document.querySelector('button[onclick="buyUpgrade()"]').innerText = "Buy Upgrade ($" + upgradeCost + ")";
+    }
+
+    // Add passive income every second
+    setInterval(() => {
+      money += perSecond;
+      update();
+    }, 1000);
+  </script>
+</body>
+</html>
